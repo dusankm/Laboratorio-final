@@ -25,7 +25,7 @@ jobs:
 
     - name: Install SonarCloud Scanner locally
       run: npm install sonar-scanner --save-dev
-    
+  
 
     - name: Run SonarCloud analysis
       run: |
@@ -36,3 +36,10 @@ jobs:
         -Dsonar.host.url=https://sonarcloud.io \
         -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
         -Dsonar.branch.name=feat-devsecops
+
+    - name: SonarQube Quality Gate Check
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
+      with:
+        scanMetadataReportFile: './.scannerwork/report-task.txt'
