@@ -30,7 +30,7 @@ jobs:
     - name: Run SonarCloud analysis
       run: |
         npx sonar-scanner \
-        -Dsonar.projectKey=${{ github.event.repository.name }} \
+        -Dsonar.projectKey=dusankm_Laboratorio-final \
         -Dsonar.organization=dusankm \
         -Dsonar.sources=. \
         -Dsonar.host.url=https://sonarcloud.io \
