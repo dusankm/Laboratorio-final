@@ -47,7 +47,7 @@ jobs:
 
 #-----------------------SCA--------------------------------------
   SCA:
-    needs: SAST
+    #needs: SAST
     runs-on: ubuntu-latest
     steps:
 
@@ -59,7 +59,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Run Snyk to check for vulnerabilities
+    - name: Install Snyk
+      run: npm install -g snyk
+
+    - name: Run Snyk to check for vulnerabilities and output to a file
       uses: snyk/actions/node@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
