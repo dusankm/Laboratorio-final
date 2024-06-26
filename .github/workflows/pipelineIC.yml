@@ -65,7 +65,7 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        args: --all-projects --severity-threshold=hidh --json > snyk-output.json
+        args: --all-projects --severity-threshold=high --json > snyk-output.json
 
 
 #-----------------------Docker Build Image------------------------------------
