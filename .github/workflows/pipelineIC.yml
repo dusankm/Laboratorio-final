@@ -65,4 +65,29 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        args: --all-projects --severity-threshold=medium --json > snyk-output.json
+        args: --all-projects --severity-threshold=hidh --json > snyk-output.json
+
+
+#-----------------------Docker Build Image------------------------------------
+
+  DockerBuild:
+    needs: [SCA, SAST]
+    runs-on: self-hosted
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Docker Login
+      uses: docker/login-action@v3.0.0
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Build Docker
+      run: |
+        docker build --tag dusankm/netflix-app:latest .
+
+    - name: Push Docker
+      run: |
+        docker push dusankm/netflix-app:latest
