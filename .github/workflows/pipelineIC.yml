@@ -63,11 +63,9 @@ jobs:
       run: npm install -g snyk
 
     - name: Run Snyk to check for vulnerabilities and output to a file
-      uses: snyk/actions/node@master
+      run: snyk test --all-projects --severity-threshold=medium --json | tee snyk-result.json
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      with:
-        args: --all-projects --severity-threshold=medium --json > snyk-result.json
 
     - name: Print Snyk results
       run: cat snyk-result.json
