@@ -64,4 +64,7 @@ jobs:
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
-        args: --all-projects --severity-threshold=medium --json
+        args: --all-projects --severity-threshold=medium --json > snyk-result.json
+
+    - name: Print Snyk results
+      run: cat snyk-result.json
