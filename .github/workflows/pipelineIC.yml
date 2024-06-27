@@ -123,3 +123,15 @@ jobs:
     - name: Push Docker
       run: |
         docker push dusankm/netflix-app:latest
+
+    #-------------------- Deploy  ------------------------------------------
+
+  Deploy:
+    needs: DockerScan
+    runs-on: self-hosted
+    steps: 
+        - name: Clonacion de codigo
+          uses: actions/checkout@v4
+        - name: Despliegue
+          run: |
+            kubectl apply -f ./Kubernetes/deployment.yml
