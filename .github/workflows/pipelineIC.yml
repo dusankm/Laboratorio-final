@@ -139,7 +139,7 @@ jobs:
   #-------------------- Dast  ------------------------------------------
 
   DAST:
-    needs: DockerScan
+    needs: Deploy
     runs-on: self-hosted
     steps:
     - name: Checkout code
