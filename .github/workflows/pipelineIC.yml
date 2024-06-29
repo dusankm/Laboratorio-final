@@ -147,8 +147,8 @@ jobs:
   
     - name: Start Application
       run: |
-        kubectl port-forward deployment/netflix-app 8080:80 &
-        sleep 15 # Give the application some time to start
+          docker run -d --name netflix-app -p 8080:80 dusankm/netflix-app:latest
+          sleep 15 # Give the application some time to start
   
     - name: ZAP Scan
       uses: zaproxy/action-baseline@v0.12.0
@@ -158,6 +158,7 @@ jobs:
         target: 'http://localhost:8080'
         rules_file_name: '.zap/rules.tsv'
         cmd_options: '-a'
+        allow_issue_writing: false
   
     - name: Upload ZAP Report
       uses: actions/upload-artifact@v2
